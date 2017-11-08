@@ -12,6 +12,7 @@ public class Post implements Serializable {
     String writerId;
     String text;
     String bgUrl;
+    String location;
     long writeTime;
     Map<String, Comment> commentMap = new HashMap<>();
 
@@ -30,6 +31,14 @@ public class Post implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getBgUrl() {

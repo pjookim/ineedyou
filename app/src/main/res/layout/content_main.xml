@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_write"
+    android:layout_margin="4dp"
     tools:context="kr.camelsoft.ineedyou.MainActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout

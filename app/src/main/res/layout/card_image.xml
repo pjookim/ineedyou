@@ -10,7 +10,7 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardUseCompatPadding="true">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/background"
         android:layout_width="100dp"
         android:layout_height="100dp"
