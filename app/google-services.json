@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "463635138462",
+    "firebase_url": "https://ineedyou-57d36.firebaseio.com",
+    "project_id": "ineedyou-57d36",
+    "storage_bucket": "ineedyou-57d36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463635138462:android:2c18169e02750bd0",
+        "android_client_info": {
+          "package_name": "kr.camelsoft.ineedyou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463635138462-tdpj75nuev026k8ikk52eeibn4s0ui9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqK9PBG2_iKcYsnLpI87SoCBa12vBzpY8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -36,6 +36,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.common.data.DataHolder;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -55,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private MyAdapter mAdapter;
-    private SearchAdapter mSearchAdapter;
-    private List<Post> mPosts = new ArrayList<>();
-    private List<String> mKeys = new ArrayList<>();
+    static final List<Post> mPosts = new ArrayList<>();
+    static final List<Post> mPosts2 = new ArrayList<>();
+    static final List<String> mKeys = new ArrayList<>();
     private Query mRef;
     private static final int REQUEST_WRITE = 0;
 
@@ -82,15 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .make(mRecyclerView, newQuery, Snackbar.LENGTH_SHORT);
                 snackbar.show();
 
-                // 데이터의 순서를 역순으로 보여줌
-                mLinearLayoutManager.setReverseLayout(true);
-                mLinearLayoutManager.setStackFromEnd(true);
-
-                mRecyclerView.setLayoutManager(mLinearLayoutManager);
-                mSearchAdapter = new SearchAdapter();
-                mRecyclerView.setAdapter(mSearchAdapter);
-
-                mSearchAdapter.notifyDataSetChanged();
+                mAdapter.mSearch(newQuery);
             }
         });
 
@@ -325,42 +318,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public int getItemCount() {
             return mPosts.size();
         }
-    }
 
-    class SearchAdapter extends RecyclerView.Adapter<MyViewHolder> {
-
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = getLayoutInflater().inflate(R.layout.card_post, null);
-            MyViewHolder myViewHolder = new MyViewHolder(itemView);
-            return myViewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, final int position) {
-            final Post post = mPosts.get(position);
-            if((post.getText()).contains("babo"))
-            {
-                holder.text.setText(post.getText());
-                holder.location.setText(post.getLocation());
-                //holder.commentCount.setText("" + post.getCommentMap().size());
-                holder.timeText.setText(getDiffTimeText(post.getWriteTime()));
-                Glide.with(MainActivity.this).load(post.getBgUrl()).centerCrop().into(holder.background);
-                holder.cardView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                        intent.putExtra("postId", mKeys.get(position));
-                        intent.putExtra("post", post);
-                        startActivity(intent);
+        public void mSearch(String charText) {
+            if (charText.length() == 0) {
+                MainActivity.mPosts2.addAll(mPosts);
+            } else {
+                for (Post wp : mPosts2) {
+                    if (wp.getText().contains(charText)) {
+                        MainActivity.mPosts2.add(wp);
                     }
-                });
+                }
             }
-        }
-
-        @Override
-        public int getItemCount() {
-            return mPosts.size();
+            notifyDataSetChanged();
         }
     }
 
@@ -385,4 +354,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return format.format(new Date(targetTime));
         }
     }
+
+
 }
